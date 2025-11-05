@@ -1,0 +1,60 @@
+{% extends "admin_base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-5">
+  <h2 class="mb-4"><i class="fas fa-bullhorn me-2"></i> Add Notice</h2>
+  
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <!-- Card for Add Notice Form -->
+  <div class="card shadow-lg border-0 rounded-4">
+    <div class="card-header bg-dark text-white rounded-top-4">
+      <h5 class="mb-0">Add New Notice</h5>
+    </div>
+    <div class="card-body">
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+          <label for="title" class="form-label fw-bold">Notice Title</label>
+          <input
+            type="text"
+            class="form-control form-control-lg shadow-sm"
+            id="title"
+            name="title"
+            required
+            placeholder="Enter Notice Title !"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="details" class="form-label fw-bold">Notice Details</label>
+          <textarea
+            class="form-control shadow-sm"
+            rows="5"
+            id="details"
+            name="details"
+            required
+            placeholder="Write your notice details here..."
+          ></textarea>
+        </div>
+        <div class="text-end">
+          <button type="submit" class="btn btn-success btn-lg px-4">
+            <i class="fas fa-check-circle me-1"></i> Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+{% endblock content %}

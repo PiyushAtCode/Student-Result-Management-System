@@ -1,0 +1,70 @@
+{% extends "admin_base.html" %} {% load static %} {% block content %}
+
+<div class="container">
+  <h2 class="mb-4"><i class="fas fa-list"></i> Manage Result</h2>
+  {% if messages %} {% for message in messages %}
+  <div
+    class="alert alert-{{ message.tags }} alert-dismissible fade show"
+    role="alert"
+  >
+    {{ message }}
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+  {% endfor %} {% endif %}
+
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>S No.</th>
+            <th>Student Name</th>
+            <th>Roll ID</th>
+            <th>Class</th>
+            <th>Reg. Date</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in results %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.student.name}}</td>
+            <td>{{i.student.roll_id}}</td>
+            <td>{{i.class.class_name}}  Section {{i.student_class.section}}</td>   
+            <td>{{i.reg_date}}</td>
+            <td>
+                {% if i.student.status == 1 %}
+                <span class="badge bg-success">Active</span>
+                {% else %}
+                <span class="badge bg-danger">Inactive</span>
+                {% endif %}
+            </td>
+            
+            <td>
+             <div class="d-flex flex-wrap gap-1">
+               <a href="{% url "edit_result" i.student.id %}" class="btn btn-primary btn-sm">
+                 <i class="fas fa-edit"></i> Edit
+               </a>
+             </div>
+</td>
+
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7" class="text-center">
+                No students found
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+
+
+</div>
+
+{% endblock content %}
