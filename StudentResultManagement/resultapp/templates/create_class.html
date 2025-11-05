@@ -1,68 +1,113 @@
-{% extends "admin_base.html" %} {% load static %} {% block content %}
+{% extends "admin_base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+.container {
+    max-width: 650px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 30px 35px;
+    border-radius: 12px;
+    margin-top: 40px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+h2 {
+    font-weight: 700;
+    color: #000000; /* ✅ Black Title */
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+label {
+    font-weight: 600;
+    color: #1a202c;
+}
+
+input.form-control {
+    border-radius: 8px;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e0;
+    transition: 0.3s ease;
+}
+
+input.form-control:focus {
+    border-color: #3182ce;
+    box-shadow: 0 0 8px rgba(49, 130, 206, 0.25);
+}
+
+small.text-muted {
+    font-size: 11px;
+    color: #718096 !important;
+}
+
+.btn-success {
+    width: 100%;
+    font-weight: 600;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #2f855a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(47, 133, 90, 0.3);
+}
+
+.alert {
+    border-radius: 8px;
+    animation: fadeSlide .4s ease-in-out;
+}
+
+@keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+body {
+    background: linear-gradient(120deg, #d4e4ff, #f6fff8);
+}
+</style>
 
 <div class="container">
   <h2 class="mb-4"><i class="fas fa-plus-circle"></i> Create Student Class</h2>
-  {% if messages %} {% for message in messages %}
-  <div
-    class="alert alert-{{ message.tags }} alert-dismissible fade show"
-    role="alert"
-  >
+
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
     {{ message }}
-    <button
-      type="button"
-      class="btn-close"
-      data-bs-dismiss="alert"
-      aria-label="Close"
-    ></button>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
-  {% endfor %} {% endif %}
+  {% endfor %}
+  {% endif %}
 
   <form method="POST">
     {% csrf_token %}
+    
     <div class="mb-3">
       <label for="classname" class="form-label">Class Name</label>
-      <input
-        type="text"
-        class="form-control"
-        id="classname"
-        name="classname"
-        required
-        placeholder="Enter Class Name"
-      />
-      <small class="text-muted">e.g., Frist,Second,Sixth</small>
+      <input type="text" class="form-control" id="classname" name="classname" required placeholder="Enter Class Name" />
+      <small class="text-muted">e.g., First, Second, Sixth</small>
     </div>
 
     <div class="mb-3">
-      <label for="classnamenumeric" class="form-label"
-        >Class Name in Numeric</label
-      >
-      <input
-        type="text"
-        class="form-control"
-        id="classnamenumeric"
-        name="classnamenumeric"
-        required
-        placeholder="Enter Class Name in Numeric"
-      />
+      <label for="classnamenumeric" class="form-label">Class Name in Numeric</label>
+      <input type="text" class="form-control" id="classnamenumeric" name="classnamenumeric" required placeholder="Enter Class Name in Numeric" />
       <small class="text-muted">e.g., 1, 2, 3</small>
     </div>
 
     <div class="mb-3">
       <label for="section" class="form-label">Section</label>
-      <input
-        type="text"
-        class="form-control"
-        id="section"
-        name="section"
-        required
-        placeholder="Enter Section"
-      />
+      <input type="text" class="form-control" id="section" name="section" required placeholder="Enter Section" />
       <small class="text-muted">e.g., A, B, C</small>
     </div>
 
-    <button type="submit" class="btn btn-success">
-      <i class="fas fa-check-circle me-1"></i> Submit
-    </button>
+    <button type="submit" class="btn btn-success"><i class="fas fa-check-circle me-1"></i> Submit</button>
   </form>
 </div>
 
