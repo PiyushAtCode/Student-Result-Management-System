@@ -3,15 +3,18 @@
 {% block content %}
 
 <style>
+<style>
 .container {
-    max-width: 650px;
+    width: 90%;               /* ✅ left-right se expand */
+    max-width: 900px;         /* ✅ zyada screen pe bada dikhega */
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(10px);
     padding: 30px 35px;
     border-radius: 12px;
-    margin-top: 40px;
+    margin: 40px auto;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
 }
+
 
 h2 {
     font-weight: 700;
